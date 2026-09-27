@@ -1,5 +1,6 @@
 using LocadoraApi.Data;
 using Microsoft.EntityFrameworkCore;
+using LocadoraApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Pipeline HTTP
 if (app.Environment.IsDevelopment())

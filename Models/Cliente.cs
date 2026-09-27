@@ -11,8 +11,8 @@ namespace LocadoraApi.Models
         [StringLength(150)]
         public string Nome { get; set; }
 
-        [Required]
-        [StringLength(11, MinimumLength = 11)]
+        [Required(ErrorMessage = "O CPF é obrigatório.")]
+        [RegularExpression(@"^\d{11}$", ErrorMessage = "O CPF deve conter exatamente 11 dígitos numéricos.")]
         public string Cpf { get; set; }
 
         [Required]

@@ -61,29 +61,37 @@ namespace LocadoraApi.Controllers
 
         // PUT: api/alugueis/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAluguel(int id, Aluguel aluguel)
-        {
-            if (id != aluguel.Id)
-                return BadRequest("O Id da rota difere do Id do corpo da requisição.");
+public async Task<IActionResult> PutAluguel(int id, Aluguel aluguel)
+{
+    if (id != aluguel.Id)
+        return BadRequest("O Id da rota difere do Id do corpo da requisição.");
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+    if (!ModelState.IsValid)
+        return BadRequest(ModelState);
 
-            var existente = await _context.Alugueis.FindAsync(id);
-            if (existente == null)
-                return NotFound($"Aluguel com Id {id} não encontrado.");
+    var existente = await _context.Alugueis.FindAsync(id);
+    if (existente == null)
+        return NotFound($"Aluguel com Id {id} não encontrado.");
 
-            existente.DataInicio = aluguel.DataInicio;
-            existente.DataFim = aluguel.DataFim;
-            existente.DataDevolucao = aluguel.DataDevolucao;
-            existente.KmInicial = aluguel.KmInicial;
-            existente.KmFinal = aluguel.KmFinal;
-            existente.ValorDiaria = aluguel.ValorDiaria;
-            existente.ValorTotal = aluguel.ValorTotal;
+    // Regra de negócio: devolução não pode ser antes do início
+    if (aluguel.DataDevolucao.HasValue && aluguel.DataDevolucao < existente.DataInicio)
+        return BadRequest("A data de devolução não pode ser anterior à data de início do aluguel.");
 
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
+    // Regra de negócio: km final não pode ser menor que km inicial
+    if (aluguel.KmFinal.HasValue && aluguel.KmFinal < existente.KmInicial)
+        return BadRequest("A quilometragem final não pode ser menor que a quilometragem inicial.");
+
+    existente.DataInicio = aluguel.DataInicio;
+    existente.DataFim = aluguel.DataFim;
+    existente.DataDevolucao = aluguel.DataDevolucao;
+    existente.KmInicial = aluguel.KmInicial;
+    existente.KmFinal = aluguel.KmFinal;
+    existente.ValorDiaria = aluguel.ValorDiaria;
+    existente.ValorTotal = aluguel.ValorTotal;
+
+    await _context.SaveChangesAsync();
+    return NoContent();
+}
 
         // DELETE: api/alugueis/5
         [HttpDelete("{id}")]

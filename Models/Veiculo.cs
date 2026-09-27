@@ -13,9 +13,11 @@ namespace LocadoraApi.Models
         public string Modelo { get; set; }
 
         [Required]
+        [Range(1900, 2100, ErrorMessage = "Ano de fabricação inválido.")]
         public int AnoFabricacao { get; set; }
 
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "A quilometragem não pode ser negativa.")]
         public double Quilometragem { get; set; }
 
         // Chave estrangeira -> Fabricante

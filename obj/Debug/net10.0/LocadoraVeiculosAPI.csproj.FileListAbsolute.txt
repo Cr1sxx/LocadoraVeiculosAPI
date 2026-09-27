@@ -166,3 +166,4 @@ C:\Users\Cristhian\Documents\CRISTHIAN\Faculdade\TADS\LocadoraVeiculosAPI\obj\De
 C:\Users\Cristhian\Documents\CRISTHIAN\Faculdade\TADS\LocadoraVeiculosAPI\obj\Debug\net10.0\LocadoraVeiculosAPI.pdb
 C:\Users\Cristhian\Documents\CRISTHIAN\Faculdade\TADS\LocadoraVeiculosAPI\obj\Debug\net10.0\LocadoraVeiculosAPI.genruntimeconfig.cache
 C:\Users\Cristhian\Documents\CRISTHIAN\Faculdade\TADS\LocadoraVeiculosAPI\obj\Debug\net10.0\ref\LocadoraVeiculosAPI.dll
+C:\Users\Cristhian\Documents\CRISTHIAN\Faculdade\TADS\LocadoraVeiculosAPI\obj\Debug\net10.0\LocadoraVeiculosAPI.sourcelink.json

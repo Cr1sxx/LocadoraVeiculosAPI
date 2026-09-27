@@ -28,16 +28,20 @@ namespace LocadoraApi.Models
         public DateTime? DataDevolucao { get; set; }
 
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "A quilometragem inicial não pode ser negativa.")]
         public double KmInicial { get; set; }
 
         // Só é preenchido na devolução
+        [Range(0, double.MaxValue, ErrorMessage = "A quilometragem final não pode ser negativa.")]
         public double? KmFinal { get; set; }
 
         [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "O valor da diária deve ser maior que zero.")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal ValorDiaria { get; set; }
 
         [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "O valor total deve ser maior que zero.")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal ValorTotal { get; set; }
 
